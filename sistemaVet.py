@@ -37,22 +37,22 @@ class Mascota:
 
 class sistemaV:
     def __init__(self):
-        self.__lista_mascotas = []
-        # self.__lista_mascotas = {}
+        self.__lista_mascotas = [{},{}]
+        #self.__lista_mascotas = {}
 
-    def verificarExiste(self,historia):
-        for m in self.__lista_mascotas:
+    def verificarExiste(self,a,historia):
+        for m in self.__lista_mascotas[a]:
             if historia == m.verHistoria():
                 return True
         #solo luego de haber recorrido todo el ciclo se retorna False
         return False
 
-    def verNumeroMascotas(self):
-        return len(self.__lista_mascotas) 
+    def verNumeroMascotas(self,a):
+        return len(self.__lista_mascotas[a]) 
 
-    def ingresarMascota(self,mascota):
-        self.__lista_mascotas.append(mascota) 
-        # self.__lista_mascotas[mascota.verHistoria()]=mascota
+    def ingresarMascota(self,a,mascota):
+        self.__lista_mascotas[a][mascota.verHistoria()]=mascota
+        #self.__lista_mascotas[mascota.verHistoria()]=mascota
 
     def verFechaIngreso(self,historia):
         #busco la mascota y devuelvo el atributo solicitado
@@ -71,10 +71,14 @@ class sistemaV:
     def eliminarMascota(self, historia):
         for masc in self.__lista_mascotas:
             if historia == masc.verHistoria():
-                # del self.__lista_mascotas[masc]
-                self.__lista_mascotas.remove(masc)  #opcion con el pop
+                del self.__lista_mascotas[masc]
+                #self.__lista_mascotas.remove(masc)  #opcion con el pop
                 return True  #eliminado con exito
         return False 
+    def AllMascotas(self,a):
+        for i in self.__lista_mascotas[0]:
+            x = self.__lista_mascotas[0][a.verNombre]
+        return x
 
 
 class Medicamento:

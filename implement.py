@@ -2,6 +2,8 @@ from sistemaVet import *
 
 def main():
     servicio_hospitalario = sistemaV()
+    #cat = {}
+    #dog = {}
     while True:
         menu=int(input('''\nIngrese una opción: 
                        \n1- Ingresar una mascota 
@@ -13,29 +15,57 @@ def main():
                        \nUsted ingresó la opción: ''' ))
 
         if menu == 1:
-            if servicio_hospitalario.verNumeroMascotas() >= 10:
-                print("No hay espacio dispnible...")
-                continue
-            historia = int(input(" ingrese la historia clinica de la mascota: "))
-            if servicio_hospitalario.verificarExiste(historia) == False:
-                nombre=input("Ingrese el nombre de la mascota: ")
-                tipo=input("Ingrese el tipo de mascota (felino o canino): ")
-                peso=int(input("Ingrese el peso de la mascota: "))
-                fecha=input("Ingrese la fecha de ingreso (dia/mes/año): ")
-                medicamento=Medicamento()
-                medicamento.asignarNombre(input("Ingrese nombre del medicamento: "))
-                medicamento.asignarDosis(int(input("Ingrese dosis del medicamento: ")))
-                mas = Mascota()
-                mas.asignarNombre(nombre)
-                mas.asignarHistoria(historia)
-                mas.asignarPeso(peso)
-                mas.asignarTipo(tipo)
-                mas.asignarFecha(fecha)
-                mas.asignarMedicamento(medicamento)
-                servicio_hospitalario.ingresarMascota(mas)
-
-            else:
-                print("Ya existe una mascota con el numero de historia clínica ingresado.") 
+            tipo=input("Ingrese el tipo de mascota #1-felino ó #2-canino): ")
+            if tipo == "1":
+                tipo = "felino"
+                if servicio_hospitalario.verNumeroMascotas(0) >= 7 :
+            #if servicio_hospitalario.verNumeroMascotas() >= 10:
+                    print("No hay espacio dispnible...")
+                    continue
+                historia = int(input(" ingrese la historia clinica de la mascota: "))
+                if servicio_hospitalario.verificarExiste(0,historia) == False:
+                    nombre=input("Ingrese el nombre de la mascota: ")
+                        
+                    peso=int(input("Ingrese el peso de la mascota: "))
+                    fecha=input("Ingrese la fecha de ingreso (dia/mes/año): ")
+                    medicamento=Medicamento()
+                    medicamento.asignarNombre(input("Ingrese nombre del medicamento: "))
+                    medicamento.asignarDosis(int(input("Ingrese dosis del medicamento: ")))
+                    mas = Mascota()
+                    mas.asignarNombre(nombre)
+                    mas.asignarHistoria(historia)
+                    mas.asignarPeso(peso)
+                    mas.asignarTipo(tipo)
+                    mas.asignarFecha(fecha)
+                    mas.asignarMedicamento(medicamento)
+                    servicio_hospitalario.ingresarMascota(0,mas)
+            if tipo == "2" :     
+                tipo = "canino"
+                if tipo in servicio_hospitalario.verNumeroMascotas(1) >= 8 :
+            #if servicio_hospitalario.verNumeroMascotas() >= 10:
+                    print("No hay espacio dispnible...")
+                    continue
+                historia = int(input(" ingrese la historia clinica de la mascota: "))
+                if servicio_hospitalario.verificarExiste(1,historia) == False:
+                    nombre=input("Ingrese el nombre de la mascota: ")
+                        
+                    peso=int(input("Ingrese el peso de la mascota: "))
+                    fecha=input("Ingrese la fecha de ingreso (dia/mes/año): ")
+                    medicamento=Medicamento()
+                    medicamento.asignarNombre(input("Ingrese nombre del medicamento: "))
+                    medicamento.asignarDosis(int(input("Ingrese dosis del medicamento: ")))
+                    mas = Mascota()
+                    mas.asignarNombre(nombre)
+                    mas.asignarHistoria(historia)
+                    mas.asignarPeso(peso)
+                    mas.asignarTipo(tipo)
+                    mas.asignarFecha(fecha)
+                    mas.asignarMedicamento(medicamento)
+                    servicio_hospitalario.ingresarMascota(1,mas)
+            
+                else:
+                    print("Ya existe una mascota con el numero de historia clínica ingresado.")
+            print (servicio_hospitalario.AllMascotas(mas))
 
             
         elif menu==2: # Ver fecha de ingreso
@@ -47,8 +77,11 @@ def main():
                 print("La historia clínica ingresada no corresponde con ninguna mascota en el sistema.")
           
         elif menu==3: # Ver número de mascotas en el servicio 
-            numero=servicio_hospitalario.verNumeroMascotas()
-            print("El número de pacientes en el sistema es: " + str(numero))
+            numero=servicio_hospitalario.verNumeroMascotas(0)
+            print("El número de pacientes gatunos en el sistema es: " + str(numero) + "\n")
+
+            numero=servicio_hospitalario.verNumeroMascotas(1)
+            print("El número de pacientes perrunos en el sistema es: " + str(numero))
 
         elif menu==4:
             q = int(input("Ingrese la historia clínica de la mascota: "))
